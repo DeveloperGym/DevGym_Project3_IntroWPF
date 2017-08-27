@@ -60,10 +60,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\MainWindowViewModel.cs" />
+    <Compile Include="Models\SettingsData.cs" />
+    <Compile Include="Models\SettingsDataEdit.cs" />
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Support\BaseNotify.cs" />
+    <Compile Include="Support\CommandHandler.cs" />
     <Compile Include="Support\EyeMotion.cs" />
+    <Compile Include="Support\SettingsManager.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -119,7 +125,13 @@
     <Resource Include="Resources\ic_settings_white_48dp.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Resource Include="Resources\ic_delete_forever_black_48dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ic_cancel_black_48dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ic_check_black_48dp.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

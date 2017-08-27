@@ -8,7 +8,8 @@
         Title="Short Cutter"
         Background="Black"
         MinWidth="100" MinHeight="80"
-        Width="525" Height="80" Icon="Resources/DeveloperGymIcon.ico">
+        Width="525" Height="80"
+        Icon="Resources/DeveloperGymIcon.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Name="EyeRow" Height="20" />
@@ -17,8 +18,8 @@
         
         <!-- Region Row 0, The Eye -->
         <Canvas Name="TheEye" Grid.Row="0">
-            <Rectangle Name="Eye0" Canvas.Left="0" Canvas.Top="0" Width="20" Height="{Binding ElementName=TheEye, Path=ActualHeight}" Fill="Red" Panel.ZIndex="100" />
-            <Rectangle Name="Eye1" Canvas.Left="-20" Canvas.Top="0" Width="20" Height="{Binding ElementName=TheEye, Path=ActualHeight}" Fill="DarkRed" Panel.ZIndex="75" />
+            <Rectangle Name="EyePiece0" Canvas.Left="0" Canvas.Top="0" Width="20" Height="{Binding ElementName=TheEye, Path=ActualHeight}" Fill="Red" Panel.ZIndex="100" />
+            <Rectangle Name="EyePiece1" Canvas.Left="-20" Canvas.Top="0" Width="20" Height="{Binding ElementName=TheEye, Path=ActualHeight}" Fill="DarkRed" Panel.ZIndex="75" />
         </Canvas>
         <!-- EndRegion -->
 
@@ -32,7 +33,7 @@
             </Grid.ColumnDefinitions>
             
             <!-- Region Column 0, DropDown -->
-            <ComboBox />
+            <ComboBox ItemsSource="{Binding Applications}" DisplayMemberPath="Name" SelectedValuePath="Target" SelectedItem="{Binding Path=SelectedApplication}" IsSynchronizedWithCurrentItem="True" />
             <!-- EndRegion -->
 
             <!-- Region Column 1, Run App -->

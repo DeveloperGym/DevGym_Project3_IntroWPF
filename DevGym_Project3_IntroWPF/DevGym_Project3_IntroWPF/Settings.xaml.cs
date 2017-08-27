@@ -1,6 +1,10 @@
-﻿using System;
+﻿using DevGym_Project3_IntroWPF.Models;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,11 +21,60 @@ namespace DevGym_Project3_IntroWPF
     /// <summary>
     /// Interaction logic for Settings.xaml
     /// </summary>
-    public partial class Settings : Window
+    public partial class Settings : Window, INotifyPropertyChanged
     {
+        #region Fields
+        private ObservableCollection<SettingsDataEdit> _Applications = new ObservableCollection<SettingsDataEdit>();
+        #endregion
+
+        #region Properties
+        public ObservableCollection<SettingsDataEdit> Applications
+        {
+            get { return _Applications; }
+            set
+            {
+                if (_Applications != value)
+                {
+                    _Applications = value ?? new ObservableCollection<SettingsDataEdit>();
+                    OnPropertyChanged();
+                }
+            }
+        }
+        #endregion
+
+        #region INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName]string propChanged = null)
+        {
+            if (PropertyChanged != null && !String.IsNullOrEmpty(propChanged))
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propChanged));
+            }
+        }
+        #endregion
+
         public Settings()
         {
             InitializeComponent();
+
+            this.DataContext = this;
+
+            MainWindow.instance.ViewModel.Applications.ToList().ForEach(s => Applications.Add(new SettingsDataEdit() { Name = s.Name, Target = s.Target }));
+        }
+
+        public void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        public void Save_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.instance.ViewModel.Applications.Clear();
+            Applications.ToList().ForEach(app => MainWindow.instance.ViewModel.Applications.Add(new SettingsData() { Name = app.Name, Target = app.Target }));
+            SettingsManager.Save(MainWindow.instance.ViewModel.Applications);
+
+            this.Close();
         }
     }
 }

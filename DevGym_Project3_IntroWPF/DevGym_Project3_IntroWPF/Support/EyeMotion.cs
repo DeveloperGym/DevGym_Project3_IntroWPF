@@ -33,8 +33,13 @@ namespace DevGym_Project3_IntroWPF
         #endregion
 
         #region Methods
-        public void Update()
+        public void Update(double overrideMoveSpeed = 0)
         {
+            if (overrideMoveSpeed > 0)
+            {
+                MoveSpeed = overrideMoveSpeed;
+            }
+
             var Left = Canvas.GetLeft(ObjectToMove);
             if (MovingRight)
             {
