@@ -112,5 +112,14 @@
     <Resource Include="Resources\DeveloperGymIcon.ico" />
     <Resource Include="Resources\DeveloperGymIcon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ic_arrow_forward_white_48dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ic_settings_white_48dp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

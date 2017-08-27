@@ -49,6 +49,17 @@ namespace DevGym_Project3_IntroWPF
         {
             Motions.ForEach(eye => eye.Update());
         }
+
+        private void Excute_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            var SettingsWindow = new Settings();
+            SettingsWindow.ShowDialog();
+        }
         #endregion
     }
 }

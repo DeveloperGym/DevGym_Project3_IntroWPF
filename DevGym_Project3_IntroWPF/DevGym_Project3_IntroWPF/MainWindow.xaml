@@ -7,12 +7,12 @@
         mc:Ignorable="d"
         Title="Short Cutter"
         Background="Black"
-        MinWidth="100" MinHeight="100"
-        Width="525" Height="350" Icon="Resources/DeveloperGymIcon.ico">
+        MinWidth="100" MinHeight="80"
+        Width="525" Height="80" Icon="Resources/DeveloperGymIcon.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Name="EyeRow" Height="20" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
         </Grid.RowDefinitions>
         
         <!-- Region Row 0, The Eye -->
@@ -23,6 +23,30 @@
         <!-- EndRegion -->
 
         <!-- Region Row 1, Shortcuts -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="20" />
+            </Grid.ColumnDefinitions>
+            
+            <!-- Region Column 0, DropDown -->
+            <ComboBox />
+            <!-- EndRegion -->
+
+            <!-- Region Column 1, Run App -->
+            <Button Name="Excute" Grid.Column="1" Background="Black" Click="Excute_Click">
+                <Image Source="Resources/ic_arrow_forward_white_48dp.png" />
+            </Button>
+            <!-- EndRegion -->
+
+            <!-- Region Column 3, Settings -->
+            <Button Name="Settings" Grid.Column="3" Background="Black" Click="Settings_Click">
+                <Image Source="Resources/ic_settings_white_48dp.png" />
+            </Button>
+            <!-- EndRegion -->
+        </Grid>
         <!-- EndRegion -->
     </Grid>
 </Window>
