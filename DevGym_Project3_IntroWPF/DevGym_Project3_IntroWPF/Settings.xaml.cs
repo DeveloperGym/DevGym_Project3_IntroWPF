@@ -25,6 +25,7 @@ namespace DevGym_Project3_IntroWPF
     {
         #region Fields
         private ObservableCollection<SettingsDataEdit> _Applications = new ObservableCollection<SettingsDataEdit>();
+        private SettingsDataEdit _SelectedItem = null;
         #endregion
 
         #region Properties
@@ -39,6 +40,25 @@ namespace DevGym_Project3_IntroWPF
                     OnPropertyChanged();
                 }
             }
+        }
+
+        public SettingsDataEdit SelectedItem
+        {
+            get { return _SelectedItem; }
+            set
+            {
+                if (_SelectedItem != value)
+                {
+                    _SelectedItem = value;
+                    OnPropertyChanged();
+                    OnPropertyChanged("InputEnabled");
+                }
+            }
+        }
+
+        public bool InputEnabled
+        {
+            get { return (SelectedItem != null); }
         }
         #endregion
 
@@ -71,6 +91,7 @@ namespace DevGym_Project3_IntroWPF
         public void AddNew_Click(object sender, RoutedEventArgs e)
         {
             Applications.Add(new SettingsDataEdit());
+            
         }
 
         public void Save_Click(object sender, RoutedEventArgs e)
@@ -80,6 +101,12 @@ namespace DevGym_Project3_IntroWPF
             SettingsManager.Save(MainWindow.instance.ViewModel.Applications);
 
             this.Close();
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SelectedItem == null) { return; }
+            int a = 1;
         }
     }
 }
