@@ -9,11 +9,13 @@ namespace DevGym_Project3_IntroWPF.Models
 {
     public class SettingsDataEdit : SettingsData
     {
-        public ICommand Browse { get; set; } 
+        public ICommand Browse { get; set; }
+        public ICommand Remove { get; set; }
 
         public SettingsDataEdit()
         {
             Browse = new CommandHandler(() => ExecuteBrowse(), true);
+            Remove = new CommandHandler(() => ExecuteRemove(), true);
         }
 
         private void ExecuteBrowse()
@@ -25,6 +27,11 @@ namespace DevGym_Project3_IntroWPF.Models
             {
                 Target = FileDialog.FileName;
             }
+        }
+
+        private void ExecuteRemove()
+        {
+            // TODO: Fill in
         }
     }
 }

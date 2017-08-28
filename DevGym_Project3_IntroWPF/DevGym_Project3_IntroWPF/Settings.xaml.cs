@@ -68,6 +68,11 @@ namespace DevGym_Project3_IntroWPF
             this.Close();
         }
 
+        public void AddNew_Click(object sender, RoutedEventArgs e)
+        {
+            Applications.Add(new SettingsDataEdit());
+        }
+
         public void Save_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.instance.ViewModel.Applications.Clear();

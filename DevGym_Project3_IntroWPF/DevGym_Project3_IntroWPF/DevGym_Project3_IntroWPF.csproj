@@ -133,5 +133,8 @@
   <ItemGroup>
     <Resource Include="Resources\ic_check_black_48dp.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ic_note_add_black_48dp.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
