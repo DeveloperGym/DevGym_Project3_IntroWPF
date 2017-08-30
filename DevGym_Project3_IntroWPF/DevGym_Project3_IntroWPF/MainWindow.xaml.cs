@@ -32,6 +32,8 @@ namespace DevGym_Project3_IntroWPF
 
         private DispatcherTimer EyeUpdater { get; set; }
 
+        private DispatcherTimer ErrorUpdater { get; set; }
+
         private List<EyeMotion> Motions { get; set; }
 
         public MainWindowViewModel ViewModel
@@ -57,6 +59,11 @@ namespace DevGym_Project3_IntroWPF
             InitializeComponent();
 
             instance = this;
+
+            // Error Message
+            ErrorUpdater = new DispatcherTimer();
+            ErrorUpdater.Tick += (o, i) => { ErrorOutput.Visibility = Visibility.Hidden; ErrorUpdater.Stop(); };
+            ErrorUpdater.Interval = new TimeSpan(0, 0, 5);
 
             // Simple Eye Animation
             Motions = new List<EyeMotion>();
@@ -103,18 +110,19 @@ namespace DevGym_Project3_IntroWPF
             {
                 if (!System.IO.File.Exists(ViewModel.SelectedApplication.Target))
                 {
-                    //ErrorManager.Report("Missing App Launcher Target: " + OneApp.Target, ErrorSeverity.Critical);
+                    ShowError("Not Found: " + ViewModel.SelectedApplication.Target);
                     return;
                 }
 
                 ProcessStartInfo PSI = new ProcessStartInfo(ViewModel.SelectedApplication.Target) { UseShellExecute = false };
-                //if (!String.IsNullOrWhiteSpace(OneApp.Arguments)) { PSI.Arguments = OneApp.Arguments; }
-                //if (!String.IsNullOrWhiteSpace(OneApp.StartIn)) { PSI.WorkingDirectory = OneApp.StartIn; }
+                //if (!String.IsNullOrWhiteSpace(ViewModel.SelectedApplication.Arguments)) { PSI.Arguments = ViewModel.SelectedApplication.Arguments; }
+                //if (!String.IsNullOrWhiteSpace(ViewModel.SelectedApplication.StartIn)) { PSI.WorkingDirectory = ViewModel.SelectedApplication.StartIn; }
                 Process.Start(PSI);
             }
-            catch //(Exception ex)
+            catch (Exception ex)
             {
                 //ErrorManager.Report(ex.ToString(), ErrorSeverity.Critical);
+                ShowError("Error: " + ex.Message);
             }
         }
 
@@ -122,6 +130,15 @@ namespace DevGym_Project3_IntroWPF
         {
             var SettingsWindow = new Settings();
             SettingsWindow.ShowDialog();
+        }
+        #endregion
+
+        #region Methods
+        public void ShowError(string error)
+        {
+            ViewModel.ErrorMessage = error;
+            ErrorOutput.Visibility = Visibility.Visible;
+            ErrorUpdater.Start();
         }
         #endregion
     }

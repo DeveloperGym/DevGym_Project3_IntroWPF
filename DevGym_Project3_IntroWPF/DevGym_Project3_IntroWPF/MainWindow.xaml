@@ -13,7 +13,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Name="EyeRow" Height="20" />
-            <RowDefinition Height="20" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         
         <!-- Region Row 0, The Eye -->
@@ -47,6 +47,12 @@
                 <Image Source="Resources/ic_settings_white_48dp.png" />
             </Button>
             <!-- EndRegion -->
+        </Grid>
+        <!-- EndRegion -->
+        
+        <!-- Region Overlay, Error Message -->
+        <Grid Name="ErrorOutput" Grid.Row="0" Grid.RowSpan="2" Background="White" Visibility="Hidden">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Text="{Binding ErrorMessage}" TextWrapping="WrapWithOverflow" />
         </Grid>
         <!-- EndRegion -->
     </Grid>

@@ -11,8 +11,8 @@ namespace DevGym_Project3_IntroWPF.Models
     {
         #region Fields
         private ObservableCollection<SettingsData> _Applications = new ObservableCollection<SettingsData>();
-
         private SettingsData _SelectedApplication = null;
+        private string _ErrorMessage = null;
         #endregion
 
         #region Properties
@@ -37,6 +37,19 @@ namespace DevGym_Project3_IntroWPF.Models
                 if (_SelectedApplication != value)
                 {
                     _SelectedApplication = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string ErrorMessage
+        {
+            get { return _ErrorMessage; }
+            set
+            {
+                if (_ErrorMessage != value)
+                {
+                    _ErrorMessage = value;
                     OnPropertyChanged();
                 }
             }

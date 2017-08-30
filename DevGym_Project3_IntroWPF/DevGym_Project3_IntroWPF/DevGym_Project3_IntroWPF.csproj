@@ -62,7 +62,6 @@
     </ApplicationDefinition>
     <Compile Include="Models\MainWindowViewModel.cs" />
     <Compile Include="Models\SettingsData.cs" />
-    <Compile Include="Models\SettingsDataEdit.cs" />
     <Compile Include="Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>

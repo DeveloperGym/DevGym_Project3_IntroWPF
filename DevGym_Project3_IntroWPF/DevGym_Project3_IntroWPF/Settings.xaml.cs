@@ -24,25 +24,25 @@ namespace DevGym_Project3_IntroWPF
     public partial class Settings : Window, INotifyPropertyChanged
     {
         #region Fields
-        private ObservableCollection<SettingsDataEdit> _Applications = new ObservableCollection<SettingsDataEdit>();
-        private SettingsDataEdit _SelectedItem = null;
+        private ObservableCollection<SettingsData> _Applications = new ObservableCollection<SettingsData>();
+        private SettingsData _SelectedItem = null;
         #endregion
 
         #region Properties
-        public ObservableCollection<SettingsDataEdit> Applications
+        public ObservableCollection<SettingsData> Applications
         {
             get { return _Applications; }
             set
             {
                 if (_Applications != value)
                 {
-                    _Applications = value ?? new ObservableCollection<SettingsDataEdit>();
+                    _Applications = value ?? new ObservableCollection<SettingsData>();
                     OnPropertyChanged();
                 }
             }
         }
 
-        public SettingsDataEdit SelectedItem
+        public SettingsData SelectedItem
         {
             get { return _SelectedItem; }
             set
@@ -52,6 +52,8 @@ namespace DevGym_Project3_IntroWPF
                     _SelectedItem = value;
                     OnPropertyChanged();
                     OnPropertyChanged("InputEnabled");
+                    OnPropertyChanged("SortUpEnabled");
+                    OnPropertyChanged("SortDownEnabled");
                 }
             }
         }
@@ -59,6 +61,30 @@ namespace DevGym_Project3_IntroWPF
         public bool InputEnabled
         {
             get { return (SelectedItem != null); }
+        }
+
+        public bool SortUpEnabled
+        {
+            get
+            {
+                if (InputEnabled)
+                {
+                    if (Applications.IndexOf(SelectedItem) > 0) { return true; }
+                }
+                return false;
+            }
+        }
+
+        public bool SortDownEnabled
+        {
+            get
+            {
+                if (InputEnabled)
+                {
+                    if (Applications.IndexOf(SelectedItem) < Applications.Count - 1) { return true; }
+                }
+                return false;
+            }
         }
         #endregion
 
@@ -80,7 +106,7 @@ namespace DevGym_Project3_IntroWPF
 
             this.DataContext = this;
 
-            MainWindow.instance.ViewModel.Applications.ToList().ForEach(s => Applications.Add(new SettingsDataEdit() { Name = s.Name, Target = s.Target }));
+            MainWindow.instance.ViewModel.Applications.ToList().ForEach(s => Applications.Add(new SettingsData() { Name = s.Name, Target = s.Target }));
         }
 
         public void Cancel_Click(object sender, RoutedEventArgs e)
@@ -90,23 +116,64 @@ namespace DevGym_Project3_IntroWPF
 
         public void AddNew_Click(object sender, RoutedEventArgs e)
         {
-            Applications.Add(new SettingsDataEdit());
-            
+            Applications.Add(new SettingsData());
+            SelectedItem = Applications.Last();
         }
 
         public void Save_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.instance.ViewModel.Applications.Clear();
-            Applications.ToList().ForEach(app => MainWindow.instance.ViewModel.Applications.Add(new SettingsData() { Name = app.Name, Target = app.Target }));
+            if (Applications.Count > 0)
+            {
+                Applications.ToList().ForEach(app => MainWindow.instance.ViewModel.Applications.Add(new SettingsData() { Name = app.Name, Target = app.Target }));
+                MainWindow.instance.ViewModel.SelectedApplication = MainWindow.instance.ViewModel.Applications[0];
+            }
             SettingsManager.Save(MainWindow.instance.ViewModel.Applications);
 
             this.Close();
         }
 
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void Browse_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedItem == null) { return; }
-            int a = 1;
+            if (!InputEnabled) { return; }
+
+            var FileDialog = new Microsoft.Win32.OpenFileDialog();
+            var Result = FileDialog.ShowDialog();
+
+            if (Result == true)
+            {
+                SelectedItem.Target = FileDialog.FileName;
+            }
+        }
+
+        public void SortUp_Click(object sender, RoutedEventArgs e)
+        {
+            if (!InputEnabled) { return; }
+
+            var index = Applications.IndexOf(SelectedItem);
+            var MovingItem = SelectedItem;
+            Applications.RemoveAt(index);
+            Applications.Insert(index - 1, MovingItem);
+            SelectedItem = MovingItem;
+        }
+
+        public void SortDown_Click(object sender, RoutedEventArgs e)
+        {
+            if (!InputEnabled) { return; }
+
+            var index = Applications.IndexOf(SelectedItem);
+            var MovingItem = SelectedItem;
+            Applications.RemoveAt(index);
+            Applications.Insert(index + 1, MovingItem);
+            SelectedItem = MovingItem;
+        }
+
+        public void Remove_Click(object sender, RoutedEventArgs e)
+        {
+            if (!InputEnabled) { return; }
+
+            Applications.Remove(SelectedItem);
+            SelectedItem = null;
         }
     }
 }
