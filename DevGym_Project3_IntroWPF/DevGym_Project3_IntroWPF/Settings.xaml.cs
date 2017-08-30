@@ -118,6 +118,8 @@ namespace DevGym_Project3_IntroWPF
         {
             Applications.Add(new SettingsData());
             SelectedItem = Applications.Last();
+
+            NameInput.Focus();
         }
 
         public void Save_Click(object sender, RoutedEventArgs e)
@@ -174,6 +176,13 @@ namespace DevGym_Project3_IntroWPF
 
             Applications.Remove(SelectedItem);
             SelectedItem = null;
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!InputEnabled) { return; }
+
+            NameInput.Focus();
         }
     }
 }

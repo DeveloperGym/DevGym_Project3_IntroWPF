@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         
         <!-- Region Row 0, Data Grid -->
-        <DataGrid ItemsSource="{Binding Applications}" AutoGenerateColumns="False" AlternationCount="1" AlternatingRowBackground="#FF858181" IsSynchronizedWithCurrentItem="True" CanUserAddRows="False" SelectionUnit="FullRow" SelectedItem="{Binding SelectedItem}">
+        <DataGrid ItemsSource="{Binding Applications}" AutoGenerateColumns="False" AlternationCount="1" AlternatingRowBackground="#FF858181" IsSynchronizedWithCurrentItem="True" CanUserAddRows="False" SelectionUnit="FullRow" SelectedItem="{Binding SelectedItem}" SelectionChanged="DataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Name">
                     <DataGridTemplateColumn.CellTemplate>
@@ -47,7 +47,7 @@
             </Grid.ColumnDefinitions>
 
             <!-- Region Column 0, Name -->
-            <TextBox Grid.Column="0" Text="{Binding SelectedItem.Name}" IsEnabled="{Binding InputEnabled}" />
+            <TextBox Name="NameInput" Grid.Column="0" Text="{Binding SelectedItem.Name}" IsEnabled="{Binding InputEnabled}" />
             <!-- EndRegion -->
 
             <!-- Region Column 1, Target -->
