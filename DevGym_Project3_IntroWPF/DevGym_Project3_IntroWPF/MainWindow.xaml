@@ -18,8 +18,8 @@
         
         <!-- Region Row 0, The Eye -->
         <Canvas Name="TheEye" Grid.Row="0">
-            <Rectangle Name="EyePiece0" Canvas.Left="0" Canvas.Top="0" Width="20" Height="{Binding ElementName=TheEye, Path=ActualHeight}" Fill="Red" Panel.ZIndex="100" />
-            <Rectangle Name="EyePiece1" Canvas.Left="-20" Canvas.Top="0" Width="20" Height="{Binding ElementName=TheEye, Path=ActualHeight}" Fill="DarkRed" Panel.ZIndex="75" />
+            <Rectangle Name="EyePiece0" Fill="Red" Canvas.Left="0" Canvas.Top="0" Width="20" Height="{Binding ElementName=TheEye, Path=ActualHeight}" Panel.ZIndex="100" />
+            <Rectangle Name="EyePiece1" Fill="DarkRed" Canvas.Left="-20" Canvas.Top="0" Width="20" Height="{Binding ElementName=TheEye, Path=ActualHeight}" Panel.ZIndex="75" />
         </Canvas>
         <!-- EndRegion -->
 

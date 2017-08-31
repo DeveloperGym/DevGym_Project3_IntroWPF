@@ -63,6 +63,7 @@ namespace DevGym_Project3_IntroWPF
             // Error Message
             ErrorUpdater = new DispatcherTimer();
             ErrorUpdater.Tick += (o, i) => { ErrorOutput.Visibility = Visibility.Hidden; ErrorUpdater.Stop(); };
+            // THis controls how long an error message is shown, originally 5 seconds. TimeSpan(Hours, Minutes, Seconds)
             ErrorUpdater.Interval = new TimeSpan(0, 0, 5);
 
             // Simple Eye Animation
@@ -72,7 +73,9 @@ namespace DevGym_Project3_IntroWPF
 
             EyeUpdater = new DispatcherTimer();
             EyeUpdater.Tick += EyeUpdater_Tick;
-            EyeUpdater.Interval = new TimeSpan(0, 0, 0, 0, 10);
+            // This controls how often the "eye" animation is updated, about 60 FPS. TimeSpan(Hours, Minutes, Seconds, Milliseconds)
+            // A lower number will make the animation faster, but will hurt performance
+            EyeUpdater.Interval = new TimeSpan(0, 0, 0, 0, 16);
             EyeUpdater.Start();
 
             // Final Set Up
