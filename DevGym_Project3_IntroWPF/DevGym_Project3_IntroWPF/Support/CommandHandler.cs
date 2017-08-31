@@ -7,6 +7,9 @@ using System.Windows.Input;
 
 namespace DevGym_Project3_IntroWPF
 {
+    /// <summary>
+    /// Support class for future work
+    /// </summary>
     public class CommandHandler : ICommand
     {
         private Action _action;

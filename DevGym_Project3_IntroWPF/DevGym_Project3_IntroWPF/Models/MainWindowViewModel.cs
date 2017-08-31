@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace DevGym_Project3_IntroWPF.Models
 {
+    /// <summary>
+    /// Makes it easier to share data between the front end XAML and the back end C# code
+    /// </summary>
     public class MainWindowViewModel : BaseNotify
     {
         #region Fields

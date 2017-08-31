@@ -92,6 +92,11 @@ namespace DevGym_Project3_IntroWPF
         #endregion
 
         #region Events
+        /// <summary>
+        /// When the window is finished loading, do these commands
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if (ViewModel.Applications.Count > 0)
@@ -100,11 +105,21 @@ namespace DevGym_Project3_IntroWPF
             }
         }
 
+        /// <summary>
+        /// When the timed event is triggered, call the update routine to move the rectangles
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EyeUpdater_Tick(object sender, EventArgs e)
         {
             Motions.ForEach(eyePiece => eyePiece.Update());
         }
 
+        /// <summary>
+        /// When you click the arrow button, launch the program, or show an error
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Excute_Click(object sender, RoutedEventArgs e)
         {
             if (ViewModel.SelectedApplication == null) { return; }
@@ -129,6 +144,11 @@ namespace DevGym_Project3_IntroWPF
             }
         }
 
+        /// <summary>
+        /// When you click the gear button, open the settings window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             var SettingsWindow = new Settings();
@@ -137,6 +157,10 @@ namespace DevGym_Project3_IntroWPF
         #endregion
 
         #region Methods
+        /// <summary>
+        /// This updates the error message, shows it, and sets the timer to hide the message again
+        /// </summary>
+        /// <param name="error"></param>
         public void ShowError(string error)
         {
             ViewModel.ErrorMessage = error;

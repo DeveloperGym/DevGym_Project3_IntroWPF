@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DevGym_Project3_IntroWPF.Models
 {
+    /// <summary>
+    /// This class defines the info that is saved for each application in the drop down list
+    /// </summary>
     public class SettingsData : BaseNotify
     {
         private string _Target = "";

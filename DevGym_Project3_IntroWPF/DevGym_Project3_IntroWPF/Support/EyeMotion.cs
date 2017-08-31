@@ -8,6 +8,9 @@ using System.Windows.Shapes;
 
 namespace DevGym_Project3_IntroWPF
 {
+    /// <summary>
+    /// Controls the motin of a single rectangle, for perceived animation
+    /// </summary>
     public class EyeMotion
     {
         #region Properties
